@@ -474,6 +474,116 @@
     font-size: 14px;
   }
 
+  /* ---------- Model Explorer ---------- */
+  .explorer-card {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  .mx-picker {
+    padding: 20px;
+    border-right: 1px solid var(--line);
+    background: linear-gradient(180deg, var(--panel-2), transparent);
+  }
+  .mx-combo { position: relative; margin-top: 8px; }
+  .mx-search {
+    width: 100%;
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 11px 13px;
+    outline: none;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .mx-search:focus { border-color: var(--open); box-shadow: 0 0 0 3px rgba(52,224,168,.12); }
+  .mx-search::placeholder { color: var(--ink-faint); }
+  .mx-list {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0; right: 0;
+    max-height: 320px;
+    overflow-y: auto;
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    z-index: 40;
+    box-shadow: 0 18px 50px rgba(0,0,0,.5);
+    padding: 5px;
+  }
+  .mx-opt {
+    display: flex; align-items: center; gap: 10px;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    border-radius: 3px;
+    padding: 9px 10px;
+    cursor: pointer;
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 13.5px;
+  }
+  .mx-opt:hover, .mx-opt.active { background: rgba(52,224,168,.08); }
+  .mx-opt-name { font-weight: 600; }
+  .mx-opt-org { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--ink-faint); }
+  .mx-dot { width: 8px; height: 8px; border-radius: 2px; flex: none; }
+  .mx-dot.open { background: var(--open); box-shadow: 0 0 7px rgba(52,224,168,.6); }
+  .mx-dot.prop { background: var(--prop); box-shadow: 0 0 7px rgba(244,166,58,.5); }
+  .mx-noopt { padding: 12px; color: var(--ink-faint); font-family: var(--mono); font-size: 12px; }
+  .mx-hint { margin-top: 14px; font-family: var(--mono); font-size: 10.5px; line-height: 1.55; color: var(--ink-faint); letter-spacing: .02em; }
+
+  .mx-summary { padding: 22px 24px; min-height: 264px; }
+  .mx-empty { height: 100%; min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 12px; }
+  .mx-empty-mark { font-size: 42px; color: var(--line); line-height: 1; }
+  .mx-empty p { max-width: 360px; font-size: 13.5px; color: var(--ink-dim); }
+
+  .mx-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+  .mx-name { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; }
+  .mx-sub { margin-top: 8px; color: var(--ink-dim); font-size: 13px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+  .mx-block-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 22px 0 13px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .mx-perf { display: flex; flex-direction: column; gap: 13px; }
+  .mx-perf-row { display: grid; grid-template-columns: 1.25fr 2fr auto auto; gap: 14px; align-items: center; }
+  .mx-perf-cat { font-size: 13.5px; font-weight: 600; display: flex; flex-direction: column; min-width: 0; }
+  .mx-perf-bench { font-family: var(--mono); font-size: 10px; color: var(--ink-faint); font-weight: 400; margin-top: 2px; letter-spacing: .02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mx-perf-bar { height: 10px; background: var(--line-soft); border-radius: 3px; overflow: hidden; }
+  .mx-fill { display: block; height: 100%; border-radius: 3px; }
+  .mx-fill.bar-open { background: var(--open); }
+  .mx-fill.bar-prop { background: var(--prop); }
+  .mx-perf-score { font-family: var(--mono); font-size: 15px; font-weight: 600; text-align: right; white-space: nowrap; }
+  .mx-perf-unit { color: var(--ink-dim); font-size: 10px; margin-left: 3px; }
+  .mx-rank {
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    color: var(--ink-dim);
+    border: 1px solid var(--line);
+    border-radius: 100px; padding: 3px 9px; white-space: nowrap; justify-self: end;
+  }
+  .mx-rank.rank-top { color: var(--gold); border-color: var(--prop-dim); background: rgba(244,208,106,.08); }
+  .mx-rank-of { color: var(--ink-faint); font-weight: 400; }
+
+  .mx-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .mx-stat { background: var(--bg-2); border: 1px solid var(--line-soft); border-radius: var(--radius); padding: 12px 14px; }
+  .mx-stat-val { font-family: var(--mono); font-size: 18px; font-weight: 600; color: var(--accent); margin-top: 5px; }
+  .mx-stat-val span { font-size: 10.5px; color: var(--ink-dim); margin-left: 2px; }
+
+  .mx-access { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .mx-access .subs { display: flex; flex-wrap: wrap; gap: 6px; }
+
   /* ---------- Responsive ---------- */
   @media (max-width: 1080px) {
     #verdict-cards { grid-template-columns: repeat(2, 1fr); }
@@ -481,12 +591,18 @@
     .chart-wrap { border-left: none; border-top: 1px solid var(--line); }
     .provider { grid-template-columns: 1fr 1fr; }
     .provider .apikey { grid-column: 1 / -1; justify-self: start; }
+    .explorer-card { grid-template-columns: 1fr; }
+    .mx-picker { border-right: none; border-bottom: 1px solid var(--line); }
+    .mx-list { max-height: 260px; }
   }
   @media (max-width: 620px) {
     .wrap { padding: 0 16px 60px; }
     #verdict-cards { grid-template-columns: 1fr; }
     .provider { grid-template-columns: 1fr; }
     .legend { margin-left: 0; width: 100%; }
+    .mx-stats { grid-template-columns: repeat(2, 1fr); }
+    .mx-perf-row { grid-template-columns: 1fr auto auto; }
+    .mx-perf-bar { display: none; }
   }
 </style>
 </head>
@@ -510,6 +626,15 @@
       <section>
         <div class="section-head">
           <span class="num">01</span>
+          <h2>Model Explorer</h2>
+          <span class="rule"></span>
+        </div>
+        <div id="model-explorer"></div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <span class="num">02</span>
           <h2>Category Verdicts</h2>
           <span class="rule"></span>
         </div>
@@ -518,7 +643,7 @@
 
       <section>
         <div class="section-head">
-          <span class="num">02</span>
+          <span class="num">03</span>
           <h2>Leaderboards by Category</h2>
           <span class="rule"></span>
         </div>
@@ -527,7 +652,7 @@
 
       <section>
         <div class="section-head">
-          <span class="num">03</span>
+          <span class="num">04</span>
           <h2>Access &amp; Pricing</h2>
           <span class="rule"></span>
         </div>
@@ -599,6 +724,160 @@
         return 0;
       });
       rows.forEach(r => tbody.appendChild(r));
+    }
+
+    // ---------- Model index (aggregate each model across categories) ----------
+    function buildModelIndex(data) {
+      const idx = new Map();
+      data.categories.forEach(cat => {
+        const ranked = rankModels(cat);
+        const max = Math.max(...ranked.map(m => m.score)) || 1;
+        ranked.forEach((m, i) => {
+          let e = idx.get(m.model);
+          if (!e) {
+            e = { name: m.model, org: m.org, license: m.license, provider_id: m.provider_id,
+                  price_in: null, price_out: null, context: null, speed_tps: null, appearances: [] };
+            idx.set(m.model, e);
+          }
+          ["price_in", "price_out", "context", "speed_tps"].forEach(f => {
+            if (e[f] == null && m[f] != null) e[f] = m[f];
+          });
+          e.appearances.push({
+            label: cat.label, unit: cat.unit, benchmark: cat.primary_benchmark,
+            score: m.score, rank: i + 1, total: ranked.length, max
+          });
+        });
+      });
+      return idx;
+    }
+
+    // ---------- Model Explorer (searchable combobox + summary) ----------
+    function renderExplorer(data) {
+      const host = document.getElementById("model-explorer");
+      const index = buildModelIndex(data);
+      const providers = Object.fromEntries(data.providers.map(p => [p.id, p]));
+      const models = [...index.values()].sort((a, b) => a.name.localeCompare(b.name));
+
+      host.innerHTML = `
+        <div class="explorer-card">
+          <div class="mx-picker">
+            <div class="field-label">Select a model</div>
+            <div class="mx-combo">
+              <input class="mx-search" type="text" role="combobox" aria-expanded="false"
+                     aria-controls="mx-list" aria-autocomplete="list" autocomplete="off"
+                     placeholder="Search ${models.length} models…" />
+              <div class="mx-list" id="mx-list" role="listbox" hidden></div>
+            </div>
+            <div class="mx-hint">${models.length} models across ${data.categories.length} categories.<br>Type to filter, or pick from the list.</div>
+          </div>
+          <div class="mx-summary" id="mx-summary">
+            <div class="mx-empty">
+              <div class="mx-empty-mark">◎</div>
+              <p>Pick a model to see how it performs in each category, its pricing and context window, and how to get access.</p>
+            </div>
+          </div>
+        </div>`;
+
+      const input = host.querySelector(".mx-search");
+      const list = host.querySelector(".mx-list");
+      const summary = host.querySelector("#mx-summary");
+      let active = -1, filtered = models;
+
+      const optionHTML = (m, i) => `
+        <button class="mx-opt" role="option" data-name="${esc(m.name)}" data-i="${i}">
+          <span class="mx-dot ${m.license === "open" ? "open" : "prop"}"></span>
+          <span class="mx-opt-name">${esc(m.name)}</span>
+          <span class="mx-opt-org">${esc(m.org)}</span>
+        </button>`;
+
+      function renderList() {
+        list.innerHTML = filtered.length
+          ? filtered.map(optionHTML).join("")
+          : `<div class="mx-noopt">No models match.</div>`;
+      }
+      function openList() { renderList(); list.hidden = false; input.setAttribute("aria-expanded", "true"); }
+      function closeList() { list.hidden = true; input.setAttribute("aria-expanded", "false"); active = -1; }
+      function applyFilter(q) {
+        q = q.trim().toLowerCase();
+        filtered = q ? models.filter(m => m.name.toLowerCase().includes(q) || m.org.toLowerCase().includes(q)) : models;
+        active = -1;
+      }
+      function setActive(n) {
+        const opts = [...list.querySelectorAll(".mx-opt")];
+        if (!opts.length) return;
+        active = (n + opts.length) % opts.length;
+        opts.forEach((o, i) => o.classList.toggle("active", i === active));
+        opts[active].scrollIntoView({ block: "nearest" });
+      }
+      function choose(name) { input.value = name; closeList(); renderSummary(name); }
+
+      function renderSummary(name) {
+        const m = index.get(name);
+        if (!m) return;
+        const prov = providers[m.provider_id] || {};
+        const barCls = m.license === "open" ? "bar-open" : "bar-prop";
+
+        const perf = m.appearances.map(a => {
+          const pct = Math.max(3, (a.score / a.max) * 100);
+          const rankCls = a.rank === 1 ? " rank-top" : "";
+          return `
+            <div class="mx-perf-row">
+              <div class="mx-perf-cat">${esc(a.label)}<span class="mx-perf-bench">${esc(a.benchmark)}</span></div>
+              <div class="mx-perf-bar"><span class="mx-fill ${barCls}" style="width:${pct.toFixed(1)}%"></span></div>
+              <div class="mx-perf-score">${esc(trimNum(a.score))}<span class="mx-perf-unit">${esc(a.unit)}</span></div>
+              <div class="mx-rank${rankCls}">#${a.rank}<span class="mx-rank-of">/${a.total}</span></div>
+            </div>`;
+        }).join("");
+
+        const subs = (prov.subscriptions && prov.subscriptions.length)
+          ? prov.subscriptions.map(s => `<span class="sub-chip">${esc(s.plan)} &mdash; <b>$${esc(s.price_month)}</b>/mo</span>`).join("")
+          : `<span class="sub-chip">API only</span>`;
+
+        const badge = m.license === "open"
+          ? `<span class="badge open">Open</span>` : `<span class="badge prop">Proprietary</span>`;
+        const priceCell = (v) => v != null ? `$${esc(trimNum(v))}<span>/M</span>` : "&mdash;";
+
+        summary.innerHTML = `
+          <div class="mx-head">
+            <div>
+              <div class="mx-name">${esc(m.name)}</div>
+              <div class="mx-sub">${esc(m.org)} ${badge}</div>
+            </div>
+          </div>
+          <div class="mx-block-label">Performance by category</div>
+          <div class="mx-perf">${perf}</div>
+          <div class="mx-block-label">Specs &amp; pricing</div>
+          <div class="mx-stats">
+            <div class="mx-stat"><div class="field-label">Input</div><div class="mx-stat-val">${priceCell(m.price_in)}</div></div>
+            <div class="mx-stat"><div class="field-label">Output</div><div class="mx-stat-val">${priceCell(m.price_out)}</div></div>
+            <div class="mx-stat"><div class="field-label">Context</div><div class="mx-stat-val">${esc(fmtCtx(m.context))}</div></div>
+            <div class="mx-stat"><div class="field-label">Speed</div><div class="mx-stat-val">${m.speed_tps != null ? esc(trimNum(m.speed_tps)) + "<span>t/s</span>" : "&mdash;"}</div></div>
+          </div>
+          <div class="mx-block-label">Access</div>
+          <div class="mx-access">
+            <div class="subs">${subs}</div>
+            <a class="apikey" href="${esc(safeUrl(prov.api_key_url))}" target="_blank" rel="noopener">Get API key</a>
+          </div>`;
+      }
+
+      input.addEventListener("focus", openList);
+      input.addEventListener("input", () => { applyFilter(input.value); openList(); });
+      input.addEventListener("keydown", (e) => {
+        if (list.hidden && e.key === "ArrowDown") { openList(); return; }
+        if (e.key === "ArrowDown") { e.preventDefault(); setActive(active + 1); }
+        else if (e.key === "ArrowUp") { e.preventDefault(); setActive(active - 1); }
+        else if (e.key === "Enter") {
+          e.preventDefault();
+          const opts = [...list.querySelectorAll(".mx-opt")];
+          if (active >= 0 && opts[active]) choose(opts[active].dataset.name);
+          else if (opts.length === 1) choose(opts[0].dataset.name);
+        } else if (e.key === "Escape") { closeList(); input.blur(); }
+      });
+      list.addEventListener("mousedown", (e) => {
+        const opt = e.target.closest(".mx-opt");
+        if (opt) { e.preventDefault(); choose(opt.dataset.name); }
+      });
+      document.addEventListener("click", (e) => { if (!host.contains(e.target)) closeList(); });
     }
 
     // ---------- Renderers ----------
@@ -768,6 +1047,7 @@
     document.addEventListener("DOMContentLoaded", async () => {
       try {
         const data = await loadData();
+        renderExplorer(data);
         renderVerdicts(data);
         renderCategories(data);
         renderAccessPricing(data);
