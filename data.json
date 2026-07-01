@@ -60,6 +60,7 @@
       ] },
     { "id": "reasoning-math", "label": "Reasoning & Math", "primary_benchmark": "GPQA Diamond", "unit": "% accuracy", "higher_is_better": true,
       "models": [
+        { "model": "Claude Sonnet 5", "provider_id": "anthropic", "org": "Anthropic", "license": "proprietary", "score": 96.2, "price_in": 2, "price_out": 10, "context": 1000000, "speed_tps": 78.1, "notes": "GPQA Diamond 96.2% (tops Gemini 3.1 Pro); released 2026-06-30 per Artificial Analysis & launch coverage; intro price $2/$10 (rises to $3/$15) per Anthropic docs; speed per Artificial Analysis" },
         { "model": "Gemini 3.1 Pro", "provider_id": "google", "org": "Google", "license": "proprietary", "score": 94.3, "price_in": 2, "price_out": 12, "context": 1048576, "speed_tps": 136.2, "notes": "GPQA Diamond per llm-stats.com leaderboard, 2026-07-01; base price per Google pricing" },
         { "model": "Claude Opus 4.8", "provider_id": "anthropic", "org": "Anthropic", "license": "proprietary", "score": 93.6, "price_in": 5, "price_out": 25, "context": 1000000, "speed_tps": 63.1, "notes": "GPQA Diamond per llm-stats.com, 2026-07-01; price per Anthropic docs" },
         { "model": "GPT-5.5", "provider_id": "openai", "org": "OpenAI", "license": "proprietary", "score": 93.6, "price_in": 5, "price_out": 30, "context": 400000, "speed_tps": 79.0, "notes": "GPQA Diamond per llm-stats.com, 2026-07-01; price per OpenAI pricing; context 400K base (1M reported by third parties, unverified)" },
