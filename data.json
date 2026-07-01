@@ -1,0 +1,35 @@
+{
+  "last_updated": "2026-07-01",
+  "sources": [
+    { "name": "Artificial Analysis", "url": "https://artificialanalysis.ai" },
+    { "name": "LMArena", "url": "https://lmarena.ai" }
+  ],
+  "providers": [
+    { "id": "openai", "name": "OpenAI", "api_key_url": "https://platform.openai.com/api-keys",
+      "subscriptions": [ { "plan": "ChatGPT Plus", "price_month": 20, "currency": "USD" } ] },
+    { "id": "anthropic", "name": "Anthropic", "api_key_url": "https://console.anthropic.com/settings/keys",
+      "subscriptions": [ { "plan": "Claude Pro", "price_month": 20, "currency": "USD" } ] }
+  ],
+  "categories": [
+    { "id": "coding", "label": "Coding", "primary_benchmark": "SWE-bench Verified", "unit": "% resolved", "higher_is_better": true,
+      "models": [
+        { "model": "Placeholder A", "provider_id": "anthropic", "org": "Anthropic", "license": "proprietary", "score": 70.0, "price_in": 3.0, "price_out": 15.0, "context": 200000, "speed_tps": 80, "notes": "" },
+        { "model": "Placeholder B", "provider_id": "openai", "org": "OpenAI", "license": "proprietary", "score": 68.0, "price_in": 2.5, "price_out": 10.0, "context": 128000, "speed_tps": 90, "notes": "" }
+      ] },
+    { "id": "reasoning-math", "label": "Reasoning & Math", "primary_benchmark": "GPQA Diamond", "unit": "% accuracy", "higher_is_better": true,
+      "models": [
+        { "model": "Placeholder A", "provider_id": "openai", "org": "OpenAI", "license": "proprietary", "score": 82.0, "price_in": 2.5, "price_out": 10.0, "context": 128000, "speed_tps": 90, "notes": "" },
+        { "model": "Placeholder B", "provider_id": "anthropic", "org": "Anthropic", "license": "proprietary", "score": 80.0, "price_in": 3.0, "price_out": 15.0, "context": 200000, "speed_tps": 80, "notes": "" }
+      ] },
+    { "id": "image-generation", "label": "Image Generation", "primary_benchmark": "LMArena Image Arena (Elo)", "unit": "Elo", "higher_is_better": true,
+      "models": [
+        { "model": "Placeholder A", "provider_id": "openai", "org": "OpenAI", "license": "proprietary", "score": 1300, "price_in": null, "price_out": null, "context": null, "speed_tps": null, "notes": "per-image pricing" },
+        { "model": "Placeholder B", "provider_id": "openai", "org": "OpenAI", "license": "open", "score": 1250, "price_in": null, "price_out": null, "context": null, "speed_tps": null, "notes": "" }
+      ] },
+    { "id": "agentic-tooluse", "label": "Agentic & Tool Use", "primary_benchmark": "Tau-bench", "unit": "% success", "higher_is_better": true,
+      "models": [
+        { "model": "Placeholder A", "provider_id": "anthropic", "org": "Anthropic", "license": "proprietary", "score": 60.0, "price_in": 3.0, "price_out": 15.0, "context": 200000, "speed_tps": 80, "notes": "" },
+        { "model": "Placeholder B", "provider_id": "openai", "org": "OpenAI", "license": "proprietary", "score": 58.0, "price_in": 2.5, "price_out": 10.0, "context": 128000, "speed_tps": 90, "notes": "" }
+      ] }
+  ]
+}
