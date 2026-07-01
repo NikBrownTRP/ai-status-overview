@@ -178,7 +178,7 @@
   /* ---------- Verdict cards ---------- */
   #verdict-cards {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(216px, 1fr));
     gap: 14px;
   }
   .verdict {
@@ -1073,7 +1073,8 @@
     { "name": "llm-stats.com — τ²-bench Telecom", "url": "https://llm-stats.com/benchmarks/tau2-telecom" },
     { "name": "Anthropic pricing", "url": "https://platform.claude.com/docs/en/about-claude/pricing" },
     { "name": "OpenAI API pricing", "url": "https://developers.openai.com/api/docs/pricing" },
-    { "name": "Google Gemini API pricing", "url": "https://ai.google.dev/gemini-api/docs/pricing" }
+    { "name": "Google Gemini API pricing", "url": "https://ai.google.dev/gemini-api/docs/pricing" },
+    { "name": "EQ-Bench Creative Writing", "url": "https://eqbench.com/creative_writing.html" }
   ],
   "providers": [
     { "id": "openai", "name": "OpenAI", "api_key_url": "https://platform.openai.com/api-keys",
@@ -1163,6 +1164,19 @@
         { "model": "MiMo-V2-Pro", "provider_id": "xiaomi", "org": "Xiaomi", "license": "proprietary", "score": 96.8, "price_in": 1, "price_out": 3, "context": 1048576, "speed_tps": 54.1, "notes": "τ²-bench Telecom per llm-stats.com, 2026-07-01; per Artificial Analysis (V2-Pro closed-weight); base price (>256K tiered to $2/$6)" },
         { "model": "GPT-5", "provider_id": "openai", "org": "OpenAI", "license": "proprietary", "score": 96.7, "price_in": 1.25, "price_out": 10, "context": 400000, "speed_tps": null, "notes": "τ²-bench Telecom per llm-stats.com, 2026-07-01; price per OpenRouter" },
         { "model": "Nova 2 Pro", "provider_id": "amazon", "org": "Amazon", "license": "proprietary", "score": 92.7, "price_in": 2.19, "price_out": 17.5, "context": 1000000, "speed_tps": null, "notes": "τ²-bench Telecom per llm-stats.com, 2026-07-01; Nova 2 Pro Preview price via AWS Bedrock" }
+      ] },
+    { "id": "creative-writing", "label": "Creative Writing", "primary_benchmark": "EQ-Bench Creative Writing", "unit": "Elo score", "higher_is_better": true,
+      "models": [
+        { "model": "Claude Fable 5", "provider_id": "anthropic", "org": "Anthropic", "license": "proprietary", "score": 2189.3, "price_in": 10, "price_out": 50, "context": 1000000, "speed_tps": null, "notes": "EQ-Bench Creative Writing v3 (trained-rater Elo), ~2026-06; price/context per Anthropic docs" },
+        { "model": "Claude Opus 4.7", "provider_id": "anthropic", "org": "Anthropic", "license": "proprietary", "score": 2183.9, "price_in": 5, "price_out": 25, "context": 1000000, "speed_tps": null, "notes": "EQ-Bench Creative Writing v3, ~2026-06; standard Opus-tier price" },
+        { "model": "GPT-5.5", "provider_id": "openai", "org": "OpenAI", "license": "proprietary", "score": 2027.7, "price_in": 5, "price_out": 30, "context": 400000, "speed_tps": 79.0, "notes": "EQ-Bench Creative Writing v3, ~2026-06; price per OpenAI pricing" },
+        { "model": "Claude Opus 4.8", "provider_id": "anthropic", "org": "Anthropic", "license": "proprietary", "score": 1979.1, "price_in": 5, "price_out": 25, "context": 1000000, "speed_tps": 63.1, "notes": "EQ-Bench Creative Writing v3, ~2026-06; price per Anthropic docs" },
+        { "model": "GPT-5.4", "provider_id": "openai", "org": "OpenAI", "license": "proprietary", "score": 1965.2, "price_in": 2.5, "price_out": 15, "context": 400000, "speed_tps": 149.6, "notes": "EQ-Bench Creative Writing v3, ~2026-06; price per OpenAI pricing" },
+        { "model": "Claude Sonnet 4.6", "provider_id": "anthropic", "org": "Anthropic", "license": "proprietary", "score": 1937.6, "price_in": 3, "price_out": 15, "context": 1000000, "speed_tps": null, "notes": "EQ-Bench Creative Writing v3, ~2026-06; price per Anthropic docs" },
+        { "model": "Claude Opus 4.6", "provider_id": "anthropic", "org": "Anthropic", "license": "proprietary", "score": 1918.3, "price_in": 5, "price_out": 25, "context": 1000000, "speed_tps": 38.1, "notes": "EQ-Bench Creative Writing v3, ~2026-06; price per Anthropic docs" },
+        { "model": "Claude Sonnet 4.5", "provider_id": "anthropic", "org": "Anthropic", "license": "proprietary", "score": 1764.4, "price_in": 3, "price_out": 15, "context": 200000, "speed_tps": null, "notes": "EQ-Bench Creative Writing v3, ~2026-06; standard Sonnet-tier price; 200K context" },
+        { "model": "GPT-5.3 Chat", "provider_id": "openai", "org": "OpenAI", "license": "proprietary", "score": 1759.9, "price_in": null, "price_out": null, "context": null, "speed_tps": null, "notes": "EQ-Bench Creative Writing v3, ~2026-06; pricing not confirmed" },
+        { "model": "Kimi K2.6", "provider_id": "moonshot", "org": "Moonshot AI", "license": "open", "score": 1752.8, "price_in": 0.95, "price_out": 4.00, "context": 262144, "speed_tps": 54.5, "notes": "EQ-Bench Creative Writing v3, ~2026-06; open weights; price per Artificial Analysis" }
       ] }
   ]
 }
