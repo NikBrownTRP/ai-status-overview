@@ -563,12 +563,15 @@
 
     function fmtCtx(n) {
       if (n === null || n === undefined) return "—";
-      return n >= 1000 ? (n / 1000) + "K" : String(n);
+      if (n >= 1e6) return +(n / 1e6).toFixed(n % 1e6 ? 1 : 0) + "M";
+      if (n >= 1000) return Math.round(n / 1000) + "K";
+      return String(n);
     }
     function esc(s) {
       return String(s).replace(/[&<>"']/g, c =>
         ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
     }
+    function safeUrl(u){ return /^https?:\/\//i.test(u || "") ? u : "#"; }
     function trimNum(n) { return Number.isFinite(n) ? +n.toFixed(1) : n; }
 
     // ---------- Generic sortable-table handler ----------
@@ -614,7 +617,7 @@
             <div class="crown">&#9733; Leader</div>
             <div class="winner">${esc(win.model)}</div>
             <div class="org">${esc(win.org)}</div>
-            <div class="score">${esc(trimNum(win.score))}<span class="unit">${esc(cat.unit)}</span></div>
+            <div class="score" style="color:${win.license === "open" ? "var(--open)" : "var(--prop)"}">${esc(trimNum(win.score))}<span class="unit">${esc(cat.unit)}</span></div>
             <div class="bench">${esc(cat.primary_benchmark)}</div>
             <div class="runner">${runner}</div>
           </article>`;
@@ -632,8 +635,9 @@
         const w = Math.max(2, (m.score / max) * barMax);
         const cls = m.license === "open" ? "bar-open" : "bar-prop";
         const winCls = i === 0 ? " win" : "";
+        const lblText = m.model.length > 16 ? m.model.slice(0, 15) + "…" : m.model;
         return `
-          <text class="lbl" x="0" y="${y + rowH / 2 + 4}">${esc(m.model)}</text>
+          <text class="lbl" x="0" y="${y + rowH / 2 + 4}">${esc(lblText)}<title>${esc(m.model)}</title></text>
           <rect class="track" x="${barX}" y="${y + rowH / 2 - 8}" width="${barMax}" height="16" rx="3"/>
           <rect class="${cls}${winCls}" x="${barX}" y="${y + rowH / 2 - 8}" width="${w}" height="16" rx="3"/>
           <text class="val" x="${barX + w + 8}" y="${y + rowH / 2 + 4}">${esc(trimNum(m.score))}</text>`;
@@ -656,20 +660,20 @@
 
       host.innerHTML = data.categories.map(cat => {
         const ranked = rankModels(cat);
-        const topModel = ranked[0].model;
         const headCells = cols.map((c, ci) => {
           const scoreName = c.name === "Score" ? `Score (${esc(cat.unit)})` : esc(c.name);
           return `<th class="${c.numeric ? "num" : ""}" data-col="${ci}" data-numeric="${c.numeric}">${scoreName}<span class="arrow"></span></th>`;
         }).join("");
 
-        const bodyRows = ranked.map(m => {
-          const isTop = m.model === topModel;
+        const bodyRows = ranked.map((m, i) => {
+          const isTop = i === 0;
           const badge = m.license === "open"
             ? `<span class="badge open">Open</span>`
             : `<span class="badge prop">Proprietary</span>`;
+          const notesAttr = m.notes ? ` title="${esc(m.notes)}"` : "";
           return `
             <tr class="${isTop ? "top-row" : ""}">
-              <td><span class="model-name">${esc(m.model)}</span></td>
+              <td${notesAttr}><span class="model-name">${esc(m.model)}</span></td>
               <td class="dim">${esc(m.org)}</td>
               <td>${badge}</td>
               <td class="num" data-value="${m.score}">${esc(trimNum(m.score))}</td>
@@ -744,7 +748,7 @@
               <div class="field-label">Subscriptions</div>
               <div class="subs">${subs}</div>
             </div>
-            <a class="apikey" href="${esc(prov.api_key_url)}" target="_blank" rel="noopener">Get API key</a>
+            <a class="apikey" href="${esc(safeUrl(prov.api_key_url))}" target="_blank" rel="noopener">Get API key</a>
           </div>`;
       }).join("");
     }
@@ -753,7 +757,7 @@
       document.getElementById("last-updated").textContent = data.last_updated;
 
       document.getElementById("sources").innerHTML = data.sources.map(s =>
-        `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join("");
+        `<a href="${esc(safeUrl(s.url))}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join("");
 
       document.querySelector(".method").innerHTML =
         `Scores reflect each category's named primary benchmark; figures gathered from public leaderboards and model cards. ` +

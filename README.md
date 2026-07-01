@@ -5,7 +5,7 @@ A shareable HTML page ranking AI models across four benchmarks: Coding, Reasonin
 ## Viewing Locally
 
 ```bash
-open docs/index.html
+open index.html
 ```
 
 ## Publishing to GitHub Pages
@@ -29,4 +29,4 @@ This validates `data.json` and rebuilds the HTML page.
 
 - `data.json` — model rankings and provider metadata
 - `scripts/validate-data.mjs` — validator (exit 0 = valid, exit 1 = invalid)
-- `docs/` — built HTML and assets
+- `index.html` — built HTML page (repo root)
