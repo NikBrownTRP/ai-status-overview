@@ -368,8 +368,8 @@
   svg.bars .bar-prop { fill: var(--prop); }
   svg.bars .bar-open.win, svg.bars .bar-prop.win { filter: drop-shadow(0 0 5px currentColor); }
   svg.bars .track { fill: var(--line-soft); }
-  svg.bars text.lbl { fill: var(--ink-dim); font-family: var(--mono); font-size: 12px; }
-  svg.bars text.val { fill: var(--ink); font-family: var(--mono); font-size: 12px; font-weight: 600; }
+  svg.bars text.lbl { fill: var(--ink-dim); font-family: var(--mono); font-size: 17px; }
+  svg.bars text.val { fill: var(--ink); font-family: var(--mono); font-size: 17px; font-weight: 600; }
 
   /* ---------- Access & Pricing ---------- */
   #access-pricing { display: grid; grid-template-columns: 1fr; gap: 12px; }
@@ -906,20 +906,21 @@
     function barChart(cat) {
       const ranked = rankModels(cat).slice(0, 8);
       const max = Math.max(...ranked.map(m => m.score)) || 1;
-      const rowH = 38, labelW = 120, barX = labelW, W = 640;
-      const barMax = W - labelW - 70;
+      const rowH = 52, labelW = 172, barX = labelW, W = 560;
+      const barMax = W - labelW - 56;
+      const barH = 22;
       const H = ranked.length * rowH;
       const rows = ranked.map((m, i) => {
-        const y = i * rowH;
-        const w = Math.max(2, (m.score / max) * barMax);
+        const cy = i * rowH + rowH / 2;
+        const w = Math.max(3, (m.score / max) * barMax);
         const cls = m.license === "open" ? "bar-open" : "bar-prop";
         const winCls = i === 0 ? " win" : "";
         const lblText = m.model.length > 16 ? m.model.slice(0, 15) + "…" : m.model;
         return `
-          <text class="lbl" x="0" y="${y + rowH / 2 + 4}">${esc(lblText)}<title>${esc(m.model)}</title></text>
-          <rect class="track" x="${barX}" y="${y + rowH / 2 - 8}" width="${barMax}" height="16" rx="3"/>
-          <rect class="${cls}${winCls}" x="${barX}" y="${y + rowH / 2 - 8}" width="${w}" height="16" rx="3"/>
-          <text class="val" x="${barX + w + 8}" y="${y + rowH / 2 + 4}">${esc(trimNum(m.score))}</text>`;
+          <text class="lbl" x="0" y="${cy + 6}">${esc(lblText)}<title>${esc(m.model)}</title></text>
+          <rect class="track" x="${barX}" y="${cy - barH / 2}" width="${barMax}" height="${barH}" rx="4"/>
+          <rect class="${cls}${winCls}" x="${barX}" y="${cy - barH / 2}" width="${w}" height="${barH}" rx="4"/>
+          <text class="val" x="${barX + w + 9}" y="${cy + 6}">${esc(trimNum(m.score))}</text>`;
       }).join("");
       return `<svg class="bars" viewBox="0 0 ${W} ${H}" role="img" aria-label="Top models by score">${rows}</svg>`;
     }
@@ -1129,6 +1130,7 @@
         { "model": "Claude Opus 4.8", "provider_id": "anthropic", "org": "Anthropic", "license": "proprietary", "score": 93.6, "price_in": 5, "price_out": 25, "context": 1000000, "speed_tps": 63.1, "notes": "GPQA Diamond per llm-stats.com, 2026-07-01; price per Anthropic docs" },
         { "model": "GPT-5.5", "provider_id": "openai", "org": "OpenAI", "license": "proprietary", "score": 93.6, "price_in": 5, "price_out": 30, "context": 400000, "speed_tps": 79.0, "notes": "GPQA Diamond per llm-stats.com, 2026-07-01; price per OpenAI pricing; context 400K base (1M reported by third parties, unverified)" },
         { "model": "GPT-5.4", "provider_id": "openai", "org": "OpenAI", "license": "proprietary", "score": 92.8, "price_in": 2.5, "price_out": 15, "context": 400000, "speed_tps": 149.6, "notes": "GPQA Diamond per llm-stats.com, 2026-07-01; price per OpenAI pricing" },
+        { "model": "Claude Fable 5", "provider_id": "anthropic", "org": "Anthropic", "license": "proprietary", "score": 92.6, "price_in": 10, "price_out": 50, "context": 1000000, "speed_tps": null, "notes": "GPQA Diamond ~92.6% per third-party trackers (~2026-06); NOT in Anthropic's official Fable 5 table — treat as unconfirmed; price/context per Anthropic docs & Artificial Analysis" },
         { "model": "Qwen3.7 Max", "provider_id": "alibaba", "org": "Alibaba (Qwen)", "license": "proprietary", "score": 92.4, "price_in": 2.5, "price_out": 7.5, "context": 1000000, "speed_tps": 199.0, "notes": "GPQA Diamond per llm-stats.com, 2026-07-01; Alibaba Cloud Intl list price" },
         { "model": "Gemini 3 Pro", "provider_id": "google", "org": "Google", "license": "proprietary", "score": 91.9, "price_in": 2, "price_out": 12, "context": 1048576, "speed_tps": 122.0, "notes": "GPQA Diamond per llm-stats.com, 2026-07-01; price per Google pricing (secondary-sourced)" },
         { "model": "GLM-5.2", "provider_id": "zhipu", "org": "Zhipu AI", "license": "open", "score": 91.2, "price_in": 1.4, "price_out": 4.4, "context": 1000000, "speed_tps": 174.2, "notes": "GPQA Diamond per llm-stats.com, 2026-07-01; MIT open weights; price per Artificial Analysis" },
